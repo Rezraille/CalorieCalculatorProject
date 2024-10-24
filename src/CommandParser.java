@@ -11,29 +11,22 @@ public class CommandParser
     private String meal;
     private Integer weight;
 
-    private static boolean isFoodProduct (String str)
+    public static CommandName isCommandName (String str)
     {
-        return false;
+        String com = parse(str);
+        for (CommandName command:CommandName.values())
+        {
+            if (command.getCommand().equals(com))
+            {
+                return command;
+            }
+        }
+        return CommandName.ERROR;
     }
 
-    private static boolean isMeal (String str)
+    private static String parse (String str)
     {
-        return false;
-    }
-
-    private static Comanda parse (String sample)
-    {
-        if (isMeal(sample))
-        {
-            return new DataProcessing(sample);
-        }
-        else if (isFoodProduct(sample))
-        {
-            return null;
-        }
-        else
-        {
-            throw new RuntimeException(); //выдавать мою собственную ошибку!!!
-        }
+        String text = str.substring(0,str.indexOf(' '));
+        return text;
     }
 }

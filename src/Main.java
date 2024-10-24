@@ -7,13 +7,12 @@ public class Main
     {
         Scanner scanner = new Scanner(System.in);
         String text = null;
-        Comanda comanda;
+        CommandName comanda;
         while (scanner.hasNextLine())
         {
             text = scanner.nextLine();
-            comanda = CommandParser.parse(text);
-            delatelcomand(comanda);
-
+            comanda = CommandParser.isCommandName(text);
+            System.out.println(comanda);
         }
     }
 }
