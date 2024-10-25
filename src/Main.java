@@ -1,3 +1,5 @@
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Main
@@ -7,12 +9,12 @@ public class Main
     {
         Scanner scanner = new Scanner(System.in);
         String text = null;
-        CommandName comanda;
+        CommandInfo commandInfo;
         while (scanner.hasNextLine())
         {
             text = scanner.nextLine();
-            comanda = CommandParser.isCommandName(text);
-            System.out.println(comanda);
+            commandInfo = LineParser.parse(text);
+            System.out.println(commandInfo);
         }
     }
 }
