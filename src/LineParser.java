@@ -13,22 +13,10 @@ public class LineParser
     //private String meal;
     //private Integer weight;
 
-    public static CommandName isCommandName (String str)
-    {
-        String com = str.substring(0, str.indexOf(' '));
-        for (CommandName command : CommandName.values())
-        {
-            if (command.getCommand().equals(com))
-            {
-                return command;
-            }
-        }
-        return CommandName.ERROR;
-    }
 
     public static CommandInfo parse (String str)
     {
-        Map<String, String> typeAndValue = new LinkedHashMap<>();
+        LinkedHashMap<String, String> typeAndValue = new LinkedHashMap<>();
         String command = str.substring(0, str.indexOf(' '));
         str = str.substring(str.indexOf(' ') + 1);
         String[] parametr = str.split(" ");

@@ -1,13 +1,15 @@
-public enum CommandName
+package command.type;
+
+public enum CommandType
 {
     /*
-    -d - date(дата)
-    -i - index product(индекс продукта) или index food(индекс приема пищи)
-    -n - name product(название продукта)
-    -w - weight product to grams(вес съеденного в граммах) или постоянный вес продукта
-    -e - energy value to kcal(энергетическая ценность в ккал на 100 грамм)
-            или энергетическая ценность съеденного
-     */
+  -d - date(дата)
+  -i - index product(индекс продукта) или index food(индекс приема пищи)
+  -n - name product(название продукта)
+  -w - weight product to grams(вес съеденного в граммах) или постоянный вес продукта
+  -e - energy value to kcal(энергетическая ценность в ккал на 100 грамм)
+          или энергетическая ценность съеденного
+   */
     ADD_FOOD("addFood"),
     // добавить прием пищи - кушать
     //str: addFood -d 24.02.2022 -i 12 -n торт -w 100 -e 186
@@ -44,11 +46,15 @@ public enum CommandName
     ERROR("error") //потом убрать
     ;
     private String command;
-    CommandName (String command)
+
+    private CommandType (String command)
     {
         this.command = command;
     }
-    public String getCommand() {
+
+    public String getCommand ()
+    {
         return command;
     }
+
 }
