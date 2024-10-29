@@ -27,6 +27,12 @@ public class DeleteFood implements Command
     @Override
     public void execute ()
     {
-
+        // +
+        //TODO ПРОВЕРИТЬ ИНДЕКС НА NULL
+        //TODO СЧИТАТЬ ПУТЬ
+        //TODO ВЫПОЛНИТЬ ПОИСК ИНДЕКСА ПО ФАЙЛУ
+        //TODO ЕСЛИ ИНДЕКС ЕСТЬ
+        //TODO УДАЛИТЬ ДАННЫЕ ИЗ ФАЙЛА
+        //TODO ЕСЛИ ИНДЕКСА НЕТ ВЫВЕСТИ - ИНДЕКСА НЕТ
     }
 }
