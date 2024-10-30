@@ -1,9 +1,11 @@
-import command.Command;
+package realization;
+
+import Info.CommandInfo;
+import command.*;
 import command.impl.*;
-import command.type.CommandType;
+import Info.CommandType;
 
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 public class FactoryCommand
 {

@@ -3,7 +3,6 @@ package command.impl;
 import command.Command;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.LinkedHashMap;
 
 //посчитать и вывести в консоль сколько калорий съедено сегодня

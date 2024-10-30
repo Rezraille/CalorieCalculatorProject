@@ -1,4 +1,4 @@
-package command.type;
+package Info;
 
 public enum CommandType
 {

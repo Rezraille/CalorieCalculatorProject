@@ -1,5 +1,8 @@
+package realization;
+
+import Info.CommandInfo;
+
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 //LineParser - Обработка строки - Шаблон - Проверка на соответствие шаблону
 public class LineParser

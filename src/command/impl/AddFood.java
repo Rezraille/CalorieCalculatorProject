@@ -3,9 +3,7 @@ package command.impl;
 import command.Command;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.LinkedHashMap;
-import java.util.Map;
 // добавить прием пищи - кушать
 //не содержит в файле количество каллорий
 //str: addFood -d 24.02.2022 -i 12 -n торт -w 100 -e 186
@@ -19,13 +17,13 @@ import java.util.Map;
 //str: addFood -n торт -w 100 +
 public class AddFood implements Command
 {
-    private final static String PREFIX_DATE = "-d";
     private final static String PREFIX_INDEX = "-i"; //ЭТО ИЛИ -I ПРОДУКТ?//ЭТО ИЛИ -N
+    private final static String PREFIX_DATE = "-d";
     private final static String PREFIX_NAME = "-n"; //ЭТО ИЛИ -N
     private final static String PREFIX_WEIGHT = "-w"; //ДОЛЖЕН БЫТЬ
     private final static String PREFIX_ENERGY = "-e"; //ЕСЛИ НЕТ В СПИСКЕ ПРОДУКТОВ
-    private LocalDate date;
     private Integer index;
+    private LocalDate date;
     private String name;
 
     private Integer weight;
