@@ -1,6 +1,4 @@
-package objects;
-
-import java.time.LocalDate;
+package realization.objects;
 
 public class Product
 {
@@ -13,6 +11,21 @@ public class Product
         this.index = index;
         this.name = name;
         this.energy = energy;
+    }
+
+    public String getName ()
+    {
+        return name;
+    }
+
+    public Integer getEnergy ()
+    {
+        return energy;
+    }
+    @Override
+    public String toString ()
+    {
+        return index + " " + name + " " + energy;
     }
 
     public Integer getIndex ()

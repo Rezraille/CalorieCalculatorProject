@@ -1,7 +1,10 @@
 package command.impl;
 
 import command.Command;
+import realization.workingOnFiles.FileServiceProduct;
 
+import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.LinkedHashMap;
 
 //удалить продукт по индексу продукта
@@ -29,9 +32,20 @@ public class DeleteProduct implements Command
     }
 
     @Override
-    public void execute ()
+    public void execute () throws IOException
     {
-        //TODO ПРОВЕРИТЬ ИНДЕКС НА NULL
+        if (index != null)
+        {
+            FileServiceProduct.deleteLineByIndex(index);
+        }
+        else if (name != null)
+        {
+            FileServiceProduct.deleteLineByName(name);
+        }
+        else
+        {
+            System.out.println("Не введено имени или индекса для удаления.");
+        }
         //TODO СЧИТАТЬ ПУТЬ
         //TODO ВЫПОЛНИТЬ ПОИСК ИНДЕКСА ПО ФАЙЛУ
         //TODO ЕСЛИ ИНДЕКС ЕСТЬ

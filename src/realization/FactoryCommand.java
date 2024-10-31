@@ -42,5 +42,6 @@ public class FactoryCommand
         {
             return new ListOfProduct();
         }
+        return null;
     }
 }

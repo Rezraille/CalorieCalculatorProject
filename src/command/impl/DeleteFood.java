@@ -1,7 +1,10 @@
 package command.impl;
 
 import command.Command;
+import realization.workingOnFiles.FileServiceProduct;
+import realization.workingOnFiles.FileSirviceFood;
 
+import java.io.IOException;
 import java.util.LinkedHashMap;
 
 //удалить прием пищи по индексу приема пищи
@@ -24,9 +27,16 @@ public class DeleteFood implements Command
         return new DeleteFood(index);
     }
     @Override
-    public void execute ()
+    public void execute () throws IOException
     {
-        // +
+        if (index != null)
+        {
+            FileSirviceFood.deleteLineByIndex(index);
+        }
+        else
+        {
+            System.out.println("Не введено индекса для удаления.");
+        }
         //TODO ПРОВЕРИТЬ ИНДЕКС НА NULL
         //TODO СЧИТАТЬ ПУТЬ
         //TODO ВЫПОЛНИТЬ ПОИСК ИНДЕКСА ПО ФАЙЛУ

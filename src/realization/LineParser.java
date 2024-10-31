@@ -36,4 +36,8 @@ public class LineParser
         }
         return new CommandInfo(command, typeAndValue);
     }
+    public static String[] parseLineFile (String line)
+    {
+        return line.split("||");
+    }
 }

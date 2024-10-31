@@ -1,18 +1,23 @@
 package command.impl;
 
 import command.Command;
+import realization.objects.Food;
+import realization.workingOnFiles.FileSirviceFood;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 //вывести табличку о СПИСОК СЪЕДЕННЫХ ПРОДУКТОВ
 //не содержит в файле количество каллорий
-//str: getFood - за весь период (-d -i -n -w)
-//str: getFood -d  - за определенную дату(-d -i -n -w)
+//str: getFood - за текущую (-i -d -n -w)
+//str: getFood -d  - за определенную дату(-i -d -n -w)
 public class ListOfFood implements Command
 {
     private final static String PREFIX_DATE = "-d";
     private LocalDate date;
+    private List<Food> foodList = new ArrayList<>();
 
     private ListOfFood (LocalDate date)
     {
@@ -29,6 +34,11 @@ public class ListOfFood implements Command
     @Override
     public void execute ()
     {
+        foodList = FileSirviceFood.getFoodsFromFile();
+        for (Food food : foodList)
+        {
+            System.out.println(food.toString());
+        }
         //TODO ЕСЛИ ДАТА УКАЗАНА
         //TODO СЧИТАТЬ ПУТЬ
         //TODO ВЫПОЛНИТЬ ПОИСК ДАТЫ ПО ФАЙЛУ

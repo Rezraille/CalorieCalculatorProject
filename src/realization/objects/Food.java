@@ -1,4 +1,4 @@
-package objects;
+package realization.objects;
 
 import java.time.LocalDate;
 
@@ -21,6 +21,21 @@ public class Food
     public Integer getIndex ()
     {
         return index;
+    }
+
+    public LocalDate getDate ()
+    {
+        return date;
+    }
+
+    public String getName ()
+    {
+        return name;
+    }
+
+    public Integer getWeight ()
+    {
+        return weight;
     }
 
     public static Food createFood (String[] values) // может быть этот метод должен быть в классе фуд?
