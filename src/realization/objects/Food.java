@@ -38,6 +38,16 @@ public class Food
         return weight;
     }
 
+    @Override
+    public String toString ()
+    {
+        return index + " " + date + " " + name + " " + weight;
+    }
+    public String toScvString ()
+    {
+        return index + ";" + date + ";" + name + ";" + weight;
+    }
+
     public static Food createFood (String[] values) // может быть этот метод должен быть в классе фуд?
     {
         Integer index = null;

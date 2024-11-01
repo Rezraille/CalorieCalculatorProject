@@ -1,8 +1,11 @@
 package command.impl;
 
 import command.Command;
+import realization.objects.Product;
+import realization.workingOnFiles.FileServiceProduct;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 
 //добавить продукт, если он уже есть, то обновить ккал
 //str: addProd -n мандарин -e 45
@@ -22,7 +25,7 @@ public class AddProduct implements Command
     }
 
 
-    public static AddProduct create(LinkedHashMap<String,String> typeAndValue)
+    public static AddProduct create (LinkedHashMap<String, String> typeAndValue)
     {
 
         String name = typeAndValue.get(PREFIX_NAME);
@@ -30,11 +33,31 @@ public class AddProduct implements Command
         //TODO ошибку если null
 
 
-        return new AddProduct(name,energy);
+        return new AddProduct(name, energy);
     }
+
     @Override
     public void execute ()
     {
+        List<Product> products = FileServiceProduct.getListProductFromFile();
+        Boolean isEqualse = false;
+        for (Product product : products)
+        {
+            if (product.getName().equals(name))
+            {
+                product.setName(name);
+                isEqualse = true;
+            }
+            else
+            {
+                //TODO FileServiceProduct.addLineToFile(product);
+            }
+        }
+        if (isEqualse)
+        {
+            List<String> productsTemp = FileServiceProduct.convertToList(products);
+            FileServiceProduct.overwriteToFile(productsTemp);
+        }
         //TODO ПРОВЕРИТЬ ИМЯ И ККАЛ НА NULL
         //TODO ВВЕСТИ ПУТЬ
         //TODO СЧИТАТЬ ВСЕ ДАННЫЕ С КОНСОЛИ

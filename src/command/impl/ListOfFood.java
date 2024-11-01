@@ -34,7 +34,7 @@ public class ListOfFood implements Command
     @Override
     public void execute ()
     {
-        foodList = FileSirviceFood.getFoodsFromFile();
+        foodList = FileSirviceFood.getListFoodFromFile();
         for (Food food : foodList)
         {
             System.out.println(food.toString());

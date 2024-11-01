@@ -16,7 +16,7 @@ public class ListOfProduct implements Command
     @Override
     public void execute ()
     {
-        productList = FileServiceProduct.getProductsFromFile();
+        productList = FileServiceProduct.getListProductFromFile();
         for (Product product : productList)
         {
             System.out.println(product.toString());

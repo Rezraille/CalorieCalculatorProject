@@ -22,15 +22,23 @@ public class Product
     {
         return energy;
     }
+    public Integer getIndex ()
+    {
+        return index;
+    }
     @Override
     public String toString ()
     {
         return index + " " + name + " " + energy;
     }
-
-    public Integer getIndex ()
+    public String toScvString ()
     {
-        return index;
+        return index + ";" + name + ";" + energy;
+    }
+
+    public void setName (String name)
+    {
+        this.name = name;
     }
 
     public static Product createProduct (String[] values)

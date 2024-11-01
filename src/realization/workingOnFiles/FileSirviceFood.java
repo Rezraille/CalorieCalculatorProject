@@ -20,41 +20,42 @@ public class FileSirviceFood
 
     public static void deleteLineByIndex (Integer index) throws IOException
     {
-        List<Food> foods = getFoodsFromFile();
+        List<Food> foods = getListFoodFromFile();
         foods.stream()
                 .filter(f -> f.getIndex() != index)
                 .toList();
-        overwriteToFile(convertToString(foods));
+        overwriteToFile(convertToList(foods));
     }
 
     public static void deleteLineByName (String name) throws IOException
     {
-        List<Food> foods = getFoodsFromFile();
+        List<Food> foods = getListFoodFromFile();
         foods.stream()
                 .filter(f -> !f.getName().equals(name))
                 .toList();
-        overwriteToFile(convertToString(foods));
+        overwriteToFile(convertToList(foods));
     }
 
     public static Food getFoodByIndex (Integer index)
     {
-        List<Food> foods = getFoodsFromFile();
+        List<Food> foods = getListFoodFromFile();
 
         return foods.stream()
                 .filter(f -> f.getIndex() == index)
                 .findFirst()
                 .orElse(null);
     }
-    public static List<Food> getFoodsByDate (LocalDate date)
+    public static List<Food> getListFoodByDate (LocalDate date)
     {
-        List<Food> foods = getFoodsFromFile();
+        List<Food> foods = getListFoodFromFile();
 
-        return foods.stream().collect(Collectors.toList());
-                //.filter(f -> f.getDate().compareTo());
+        return foods.stream().
+                filter(d -> d.getDate().equals(date))
+                .collect(Collectors.toList());
     }
 
 
-    public static List<Food> getFoodsFromFile ()
+    public static List<Food> getListFoodFromFile ()
     {
         List<Food> foods = new ArrayList<>();
         ;
@@ -82,11 +83,11 @@ public class FileSirviceFood
 
     }
 
-    private static List<String> convertToString (List<Food> foods)
+    private static List<String> convertToList (List<Food> foods)
     {
         List<String> infoValueFoods = new ArrayList<>();
         foods.stream()
-                .map(product -> product.toString())
+                .map(food -> food.toScvString())
                 .collect(Collectors.toList());
         return infoValueFoods;
     }

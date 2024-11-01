@@ -38,6 +38,6 @@ public class LineParser
     }
     public static String[] parseLineFile (String line)
     {
-        return line.split("||");
+        return line.split(";");
     }
 }
