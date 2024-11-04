@@ -40,24 +40,20 @@ public class AddProduct implements Command
     public void execute ()
     {
         List<Product> products = FileServiceProduct.getListProductFromFile();
-        Boolean isEqualse = false;
-        for (Product product : products)
+        Product product = products.stream()
+                .filter(p -> p.getName().equals(name))
+                .findFirst().orElse(null);
+        if (product != null)
         {
-            if (product.getName().equals(name))
-            {
-                product.setName(name);
-                isEqualse = true;
-            }
-            else
-            {
-                //TODO FileServiceProduct.addLineToFile(product);
-            }
-        }
-        if (isEqualse)
-        {
+            product.setName(name);
             List<String> productsTemp = FileServiceProduct.convertToList(products);
             FileServiceProduct.overwriteToFile(productsTemp);
         }
+        else
+        {
+            //TODO FileServiceProduct.addLineToFile(product);
+        }
+
         //TODO ПРОВЕРИТЬ ИМЯ И ККАЛ НА NULL
         //TODO ВВЕСТИ ПУТЬ
         //TODO СЧИТАТЬ ВСЕ ДАННЫЕ С КОНСОЛИ

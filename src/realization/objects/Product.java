@@ -1,8 +1,10 @@
 package realization.objects;
 
+import realization.workingOnFiles.FileServiceMaxValue;
+
 public class Product
 {
-    private Integer index;
+    private  Integer index;
     private String name;
     private Integer energy;
 
@@ -22,15 +24,18 @@ public class Product
     {
         return energy;
     }
+
     public Integer getIndex ()
     {
         return index;
     }
+
     @Override
     public String toString ()
     {
         return index + " " + name + " " + energy;
     }
+
     public String toScvString ()
     {
         return index + ";" + name + ";" + energy;
@@ -41,7 +46,7 @@ public class Product
         this.name = name;
     }
 
-    public static Product createProduct (String[] values)
+    public static Product createProductFromFile (String[] values) //нужно только для создания листа внутри файла может убрать в класс файл?
     {
         Integer index = null;
         String name = null;
@@ -50,11 +55,19 @@ public class Product
         {
             switch (i)
             {
-                case 0: index = Integer.valueOf(values[i]);
-                case 1: name = values[i];
-                case 2: energy = Integer.valueOf(values[i]);
+                case 0:
+                    index = Integer.valueOf(values[i]);
+                case 1:
+                    name = values[i];
+                case 2:
+                    energy = Integer.valueOf(values[i]);
             }
         }
-        return new Product(index,name,energy);
+        return new Product(index, name, energy);
+    }
+    public Product createProduct (String name, Integer energy)
+    {
+        this.index = FileServiceMaxValue.setMaxIndexProduct();
+        return new Product(index, name, energy);
     }
 }

@@ -4,15 +4,15 @@ import java.time.LocalDate;
 
 public class Food
 {
-    private Integer index;
+    private static Integer index;
     private LocalDate date;
     private String name;
 
     private Integer weight;
 
-    private Food (Integer index, LocalDate date, String name, Integer weight)
+    private Food (LocalDate date, String name, Integer weight)
     {
-        this.index = index;
+        index++;
         this.date = date;
         this.name = name;
         this.weight = weight;

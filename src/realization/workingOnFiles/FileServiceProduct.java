@@ -54,7 +54,7 @@ public class FileServiceProduct
             while (reader.ready())
             {
                 line = reader.readLine();
-                products.add(Product.createProduct(LineParser.parseLineFile(line)));
+                products.add(Product.createProductFromFile(LineParser.parseLineFile(line)));
             }
 
         }
@@ -90,8 +90,7 @@ public class FileServiceProduct
 
     public static List<String> convertToList (List<Product> products)
     {
-        List<String> infoValueProducts = new ArrayList<>();
-        products.stream()
+        List<String> infoValueProducts = products.stream()
                 .map(product -> product.toScvString())
                 .collect(Collectors.toList());
         return infoValueProducts;

@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 
 //удалить прием пищи по индексу приема пищи
-//str: delFood -i
+//str: delFood -i(food)
 public class DeleteFood implements Command
 {
     private final static String PREFIX_INDEX = "-i";
@@ -37,11 +37,5 @@ public class DeleteFood implements Command
         {
             System.out.println("Не введено индекса для удаления.");
         }
-        //TODO ПРОВЕРИТЬ ИНДЕКС НА NULL
-        //TODO СЧИТАТЬ ПУТЬ
-        //TODO ВЫПОЛНИТЬ ПОИСК ИНДЕКСА ПО ФАЙЛУ
-        //TODO ЕСЛИ ИНДЕКС ЕСТЬ
-        //TODO УДАЛИТЬ ДАННЫЕ ИЗ ФАЙЛА
-        //TODO ЕСЛИ ИНДЕКСА НЕТ ВЫВЕСТИ - ИНДЕКСА НЕТ
     }
 }
