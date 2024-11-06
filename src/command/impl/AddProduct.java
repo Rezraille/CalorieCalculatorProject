@@ -45,13 +45,14 @@ public class AddProduct implements Command
                 .findFirst().orElse(null);
         if (product != null)
         {
-            product.setName(name);
+            product.setEnergy(this.energy);//обновление ккал
             List<String> productsTemp = FileServiceProduct.convertToList(products);
             FileServiceProduct.overwriteToFile(productsTemp);
         }
         else
         {
-            //TODO FileServiceProduct.addLineToFile(product);
+            product = product.createProduct(this.name, this.energy);
+            FileServiceProduct.addLineToFile(product);
         }
 
         //TODO ПРОВЕРИТЬ ИМЯ И ККАЛ НА NULL

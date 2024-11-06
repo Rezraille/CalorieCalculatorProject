@@ -1,5 +1,7 @@
 package realization.objects;
 
+import realization.workingOnFiles.FileServiceMaxValue;
+
 import java.time.LocalDate;
 
 public class Food
@@ -10,9 +12,9 @@ public class Food
 
     private Integer weight;
 
-    private Food (LocalDate date, String name, Integer weight)
+    private Food (Integer index, LocalDate date, String name, Integer weight)
     {
-        index++;
+        this.index = index;
         this.date = date;
         this.name = name;
         this.weight = weight;
@@ -48,7 +50,7 @@ public class Food
         return index + ";" + date + ";" + name + ";" + weight;
     }
 
-    public static Food createFood (String[] values) // может быть этот метод должен быть в классе фуд?
+    public static Food createFoodFromFile(String[] values) // может быть этот метод должен быть в классе фуд?
     {
         Integer index = null;
         LocalDate date = null;
@@ -66,5 +68,10 @@ public class Food
             }
         }
         return new Food(index,date,name,weight);
+    }
+    public Food createFood (LocalDate date, String name, Integer weight)
+    {
+        this.index = FileServiceMaxValue.setMaxIndexFood();
+        return new Food(index, date, name, weight);
     }
 }

@@ -14,7 +14,7 @@ public class FileServiceMaxValue
     private final static String NAME_MAX_INDEX_FILE = "FileIndexMaxValue.csv";
     private static Integer indexPruduct = null;
     private static Integer indexFood = null;
-    static Integer setMaxIndexProduct ()
+    public static Integer setMaxIndexProduct ()
     {
         indexPruduct = getMaxIndexProductFromFile();
         indexPruduct++;
@@ -48,7 +48,7 @@ public class FileServiceMaxValue
             e.printStackTrace();
         }
     }
-    static Integer setMaxIndexFood ()
+    public static Integer setMaxIndexFood ()
     {
         indexFood = getMaxIndexFoodFromFile();
         indexFood++;

@@ -2,59 +2,54 @@ package realization.objects;
 
 import realization.workingOnFiles.FileServiceMaxValue;
 
-public class Product
-{
-    private  Integer index;
+public class Product {
+    private Integer index;
     private String name;
     private Integer energy;
 
-    private Product (Integer index, String name, Integer energy)
-    {
+    private Product(Integer index, String name, Integer energy) {
         this.index = index;
         this.name = name;
         this.energy = energy;
     }
 
-    public String getName ()
-    {
+    public String getName() {
         return name;
     }
 
-    public Integer getEnergy ()
-    {
+    public Integer getEnergy() {
         return energy;
     }
 
-    public Integer getIndex ()
-    {
+    public Integer getIndex() {
         return index;
     }
 
     @Override
-    public String toString ()
-    {
+    public String toString() {
         return index + " " + name + " " + energy;
     }
 
-    public String toScvString ()
-    {
+    public String toScvString() {
         return index + ";" + name + ";" + energy;
     }
 
-    public void setName (String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public static Product createProductFromFile (String[] values) //нужно только для создания листа внутри файла может убрать в класс файл?
+    public void setEnergy(Integer energy)
+    {
+        this.energy = energy;
+    }
+
+    public static Product createProductFromFile(String[] values) //нужно только для создания листа внутрь файла.
     {
         Integer index = null;
         String name = null;
         Integer energy = null;
-        for (int i = 0; i < values.length; i++)
-        {
-            switch (i)
-            {
+        for (int i = 0; i < values.length; i++) {
+            switch (i) {
                 case 0:
                     index = Integer.valueOf(values[i]);
                 case 1:
@@ -65,8 +60,8 @@ public class Product
         }
         return new Product(index, name, energy);
     }
-    public Product createProduct (String name, Integer energy)
-    {
+
+    public Product createProduct(String name, Integer energy) {
         this.index = FileServiceMaxValue.setMaxIndexProduct();
         return new Product(index, name, energy);
     }

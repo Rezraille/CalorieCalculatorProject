@@ -66,12 +66,6 @@ public class FileServiceProduct
         return products;
     }
 
-
-    public static void addProductsToFile (List<Product> products)
-    {
-
-    }
-
     public static Product getProductByFood (List <Product>products, Food food)
     {
         for (Product product:products)
@@ -111,6 +105,24 @@ public class FileServiceProduct
             System.out.println("Ошибка записи в файл " + PATH_PRODUCT_FILE);
             e.printStackTrace();
         }
+    }
+    public static void writeToFile (String line)
+    {
+        try (FileWriter fileWriter = new FileWriter(NAME_PRODUCT_FILE);)
+        {
+            fileWriter.write(line);
+        }
+        catch (IOException e)
+        {
+            System.out.println("Ошибка записи строки в файл " + PATH_PRODUCT_FILE);
+            e.printStackTrace();
+        }
+    }
+    public static void addLineToFile(Product product)
+    {
+        String line = product.toScvString();
+        writeToFile("\\n" + line);
+
     }
 
 }
