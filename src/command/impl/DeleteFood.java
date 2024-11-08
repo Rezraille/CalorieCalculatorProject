@@ -11,31 +11,39 @@ import java.util.LinkedHashMap;
 //str: delFood -i(food)
 public class DeleteFood implements Command
 {
-    private final static String PREFIX_INDEX = "-i";
     private Integer index;
+    private final static String PREFIX_INDEX = "-i";
+    private String name;
+    private final static String PREFIX_NAME = "-n";
 
-    private DeleteFood (Integer index)
+    private DeleteFood (Integer index, String name)
     {
         this.index = index;
+        this.name = name;
     }
 
     public static DeleteFood create(LinkedHashMap<String,String> typeAndValue)
     {
-
-        Integer index = Integer.valueOf(typeAndValue.get(PREFIX_INDEX));//TODO добавить проверку на число
+        String i = typeAndValue.get(PREFIX_INDEX);
+        Integer index = i != null ? Integer.valueOf(i) : null; //TODO добавить проверку на число
         //TODO добавить обработку ошибок
-        return new DeleteFood(index);
+        String name = typeAndValue.get(PREFIX_NAME);
+        return new DeleteFood(index,name);
     }
     @Override
     public void execute () throws IOException
     {
-        if (index != null)
+        if (name != null && index == null)
+        {
+            FileSirviceFood.deleteLineByName(name);
+        }
+        else if (index != null && name == null)
         {
             FileSirviceFood.deleteLineByIndex(index);
         }
         else
         {
-            System.out.println("Не введено индекса для удаления.");
+            System.out.println("Ошибка ввода index или name.");
         }
     }
 }

@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 public class Food
 {
-    private static Integer index;
+    private Integer index;
     private LocalDate date;
     private String name;
 
@@ -52,26 +52,16 @@ public class Food
 
     public static Food createFoodFromFile(String[] values) // может быть этот метод должен быть в классе фуд?
     {
-        Integer index = null;
-        LocalDate date = null;
-        String name = null;
-        Integer weight = null;
-        for (int i = 0; i < values.length; i++)
-        {
-            switch (i)
-            {
-                case 0: index = Integer.valueOf(values[i]);
-                case 1: date = LocalDate.parse(values[i]);
-                case 2: name = values[i];
-                case 3: weight = Integer.valueOf(values[i]);
+        Integer index =  Integer.valueOf(values[0]);
+        LocalDate date = LocalDate.parse(values[1]);
+        String name = values[2];
+        Integer weight = Integer.valueOf(values[3]);
 
-            }
-        }
         return new Food(index,date,name,weight);
     }
-    public Food createFood (LocalDate date, String name, Integer weight)
+    public static Food createFood (LocalDate date, String name, Integer weight)
     {
-        this.index = FileServiceMaxValue.setMaxIndexFood();
+        Integer index = FileServiceMaxValue.setMaxIndexFood();
         return new Food(index, date, name, weight);
     }
 }

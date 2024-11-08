@@ -11,7 +11,7 @@ import java.io.IOException;
 public class FileServiceMaxValue
 {
     private final static String PATH_MAX_INDEX_FILE = "D:\\Java\\2. Project\\Calorie Calculator Project\\src\\file\\FileIndexMaxValue.csv";
-    private final static String NAME_MAX_INDEX_FILE = "FileIndexMaxValue.csv";
+    private final static String NAME_MAX_INDEX_FILE = "D:\\Java\\2. Project\\Calorie Calculator Project\\src\\file\\FileIndexMaxValue.csv";
     private static Integer indexPruduct = null;
     private static Integer indexFood = null;
     public static Integer setMaxIndexProduct ()
@@ -38,9 +38,11 @@ public class FileServiceMaxValue
     }
     private static void addMaxIndexProductToFile (Integer index)
     {
+        Integer maxIndexFood = getMaxIndexFoodFromFile();
         try (FileWriter fileWriter = new FileWriter(NAME_MAX_INDEX_FILE);)
         {
-            fileWriter.write(String.valueOf(index) + ";" + String.valueOf(indexFood));
+            fileWriter.write(String.valueOf(index) + ";" + String.valueOf(maxIndexFood));
+            fileWriter.flush();
         }
         catch (IOException e)
         {
@@ -72,9 +74,11 @@ public class FileServiceMaxValue
     }
     private static void addMaxIndexFoodToFile (Integer index)
     {
+        Integer maxIndexProduct = getMaxIndexProductFromFile();
         try (FileWriter fileWriter = new FileWriter(NAME_MAX_INDEX_FILE);)
         {
-            fileWriter.write(String.valueOf(indexFood) + ";" + String.valueOf(index));
+            fileWriter.write(String.valueOf(maxIndexProduct) + ";" + String.valueOf(index));
+            fileWriter.flush();
         }
         catch (IOException e)
         {

@@ -45,24 +45,15 @@ public class Product {
 
     public static Product createProductFromFile(String[] values) //нужно только для создания листа внутрь файла.
     {
-        Integer index = null;
-        String name = null;
-        Integer energy = null;
-        for (int i = 0; i < values.length; i++) {
-            switch (i) {
-                case 0:
-                    index = Integer.valueOf(values[i]);
-                case 1:
-                    name = values[i];
-                case 2:
-                    energy = Integer.valueOf(values[i]);
-            }
-        }
+        Integer index = Integer.valueOf(values[0]);
+        String name = values[1];
+        Integer energy = Integer.valueOf(values[2]);
+
         return new Product(index, name, energy);
     }
 
-    public Product createProduct(String name, Integer energy) {
-        this.index = FileServiceMaxValue.setMaxIndexProduct();
+    public static Product createProduct(String name, Integer energy) {
+        Integer index = FileServiceMaxValue.setMaxIndexProduct();
         return new Product(index, name, energy);
     }
 }

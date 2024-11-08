@@ -54,11 +54,5 @@ public class AddProduct implements Command
             product = product.createProduct(this.name, this.energy);
             FileServiceProduct.addLineToFile(product);
         }
-
-        //TODO ПРОВЕРИТЬ ИМЯ И ККАЛ НА NULL
-        //TODO ВВЕСТИ ПУТЬ
-        //TODO СЧИТАТЬ ВСЕ ДАННЫЕ С КОНСОЛИ
-        //TODO СДЕЛАТЬ ИНДЕКС И УВЕЛИЧИВАТЬ ЕГО ПОСЛЕ КАЖДОГО СОЗДАНИЯ КОМАНДЫ ИЛИ ПОСЛЕ КАЖДОГО УСПЕШНОГО ДОБАВЛЕНИЯ ДАННЫХ В ФАЙЛ
-        //TODO ДОБАВИТЬ ВСЕ ДАННЫЕ В ФАЙЛ ПРОДУКТОВ
     }
 }

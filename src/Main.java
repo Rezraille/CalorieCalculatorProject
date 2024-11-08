@@ -11,18 +11,28 @@ public class Main
 {
     public static void main (String[] args) throws IOException
     {
-        LocalDate date = LocalDate.now();
-        System.out.println(date);
+        prepare();
         Scanner scanner = new Scanner(System.in);
+
 
         while (scanner.hasNextLine())
         {
+
             String text = scanner.nextLine();
+            if (text.equals("stop"))
+            {
+                scanner.close();
+                break;
+            }
             CommandInfo info = LineParser.parse(text);
             Command command = FactoryCommand.createCommandByInfo(info);
             command.execute();
-
         }
 
+    }
+
+    private static void prepare()
+    {
+        //TODO проверить есть ли нужные файл, если нет то создать
     }
 }

@@ -7,6 +7,7 @@ import realization.workingOnFiles.FileServiceProduct;
 import realization.workingOnFiles.FileSirviceFood;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -20,6 +21,7 @@ public class CountCaloriesFood implements Command
     private final static Integer WEIGHT_PRODUCT = 100;
     private final static String PREFIX_DATE = "-d";
     private LocalDate date;
+    private final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
     private CountCaloriesFood (LocalDate date)
     {
@@ -31,7 +33,7 @@ public class CountCaloriesFood implements Command
     {
 
         String d = typeAndValue.get(PREFIX_DATE);
-        LocalDate date = d != null ? LocalDate.parse(d) : null;
+        LocalDate date = d != null ? LocalDate.parse(d,formatter) : null;
         //TODO добавить обработку ошибок
         return new CountCaloriesFood(date);
     }
@@ -52,7 +54,7 @@ public class CountCaloriesFood implements Command
         List<Integer> energyProducts  = productsToDay.stream().map(p -> p.getEnergy()).collect(Collectors.toList());
         List<Integer> weightFoods = foodsToDay.stream().map(f -> f.getWeight()).collect(Collectors.toList());
         Integer callories = null;
-        Integer sumCallories = null;
+        Integer sumCallories = 0;
         for (int i = 0; i < weightFoods.size(); i++)
         {
             callories = (weightFoods.get(i) * energyProducts.get(i))/WEIGHT_PRODUCT;

@@ -1,0 +1,49 @@
+что вводит пользователь:
+addFood -d 24.02.2022 -i 12 -n мандарин -w 120
+addFood -d 24.02.2022 -i 12 -n мандарин -w 120
+
+addFood -d 24.02.2022 -i 12 -w 120
+addFood -i 12 -n мандарин -w 120
+addFood -i 12 -w 120
+
+addFood -d 24.02.2022 -n торт -w 100 -e 186
+addFood -n торт -w 100 -e 186
+addFood -n торт -w 100
+
+addFood -d 24.02.2022 -i 1 -n мандарин -w 100
+addFood -d 24.02.2022 -i 12 -n мандарин -w 100
+
+addFood -n торт -w 100 -e 186
+addFood -n торт -w 120
+
+addProd -n мандарин -w 100 -e 100
+addProd -n апельсин -w 100 -e 200
+addProd -n курага -w 100 -e 300
+
+addFood -n мандарин -w 100
+addFood -n апельсин -w 100
+addFood -n курага -w 100 -e 300
+stop
+
+getCal -d 08.11.2024
+getCal -d 24.02.2022
+getCal (+ пробел, иначе ошибка) какой то там ещекосяк внутри парсе.
+
+delFood -i 4
+delFood -i 3
+stop
+
+delFood -n мандарин
+stop
+
+delFood -n апельсин
+stop
+
+delProd -i 3
+stop
+
+delProd -n мандарин
+stop
+
+delProd -n апельсин
+stop

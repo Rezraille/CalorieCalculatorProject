@@ -15,12 +15,12 @@ import java.util.stream.Collectors;
 public class FileServiceProduct
 {
     private final static String PATH_PRODUCT_FILE = "D:\\Java\\2. Project\\Calorie Calculator Project\\src\\file\\productFile.csv";
-    private final static String NAME_PRODUCT_FILE = "productFile.csv";
+    private final static String NAME_PRODUCT_FILE = "D:\\Java\\2. Project\\Calorie Calculator Project\\src\\file\\productFile.csv";
 
     public static void deleteLineByIndex (Integer index) throws IOException
     {
         List<Product> products = getListProductFromFile();
-        products.stream()
+        products = products.stream()
                 .filter(f -> f.getIndex() != index)
                 .toList();
         overwriteToFile(convertToList(products));
@@ -29,7 +29,7 @@ public class FileServiceProduct
     public static void deleteLineByName (String name) throws IOException
     {
         List<Product> products = getListProductFromFile();
-        products.stream()
+        products = products.stream()
                 .filter(f -> !f.getName().equals(name))
                 .toList();
         overwriteToFile(convertToList(products));
@@ -68,17 +68,15 @@ public class FileServiceProduct
 
     public static Product getProductByFood (List <Product>products, Food food)
     {
-        for (Product product:products)
+        for (Product product : products)
         {
             if (product.getName().equals(food.getName()))
             {
                 return product;
             }
-            else
-            {
-                return null;
-            }
         }
+
+        return null;
     }
 
 
@@ -94,9 +92,15 @@ public class FileServiceProduct
     {
         try (FileWriter fileWriter = new FileWriter(NAME_PRODUCT_FILE);)
         {
+            if (products.size() == 0)
+            {
+                fileWriter.write("");
+                fileWriter.flush();
+            }
             for (String product:products)
             {
-                fileWriter.write(product);
+                fileWriter.write(product + "\n");
+                fileWriter.flush();
             }
 
         }
@@ -108,9 +112,10 @@ public class FileServiceProduct
     }
     public static void writeToFile (String line)
     {
-        try (FileWriter fileWriter = new FileWriter(NAME_PRODUCT_FILE);)
+        try (FileWriter fileWriter = new FileWriter(NAME_PRODUCT_FILE, true);)
         {
             fileWriter.write(line);
+            fileWriter.flush();
         }
         catch (IOException e)
         {
@@ -121,7 +126,7 @@ public class FileServiceProduct
     public static void addLineToFile(Product product)
     {
         String line = product.toScvString();
-        writeToFile("\\n" + line);
+        writeToFile(line + "\n");
 
     }
 

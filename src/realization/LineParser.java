@@ -30,10 +30,6 @@ public class LineParser
                 typeAndValue.put(parametr[i - 1], parametr[i]);
             }
         }
-        else
-        {
-            return null;
-        }
         return new CommandInfo(command, typeAndValue);
     }
     public static String[] parseLineFile (String line)

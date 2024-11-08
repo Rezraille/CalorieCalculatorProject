@@ -5,6 +5,7 @@ import realization.objects.Food;
 import realization.workingOnFiles.FileSirviceFood;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -15,10 +16,9 @@ import java.util.List;
 //str: getFood -d  - за определенную дату(-i -d -n -w)
 public class ListOfFood implements Command
 {
+    private final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     private final static String PREFIX_DATE = "-d";
     private LocalDate date;
-    private List<Food> foodList = new ArrayList<>();
-
     private ListOfFood (LocalDate date)
     {
         this.date = date;
@@ -26,7 +26,7 @@ public class ListOfFood implements Command
     public static ListOfFood create(LinkedHashMap<String,String> typeAndValue)
     {
         String d = typeAndValue.get(PREFIX_DATE);
-        LocalDate date = d != null ? LocalDate.parse(d) : null;
+        LocalDate date = d != null ? LocalDate.parse(d,formatter) : null;
         //TODO ошибку если null
         return new ListOfFood(date);
     }
@@ -34,7 +34,14 @@ public class ListOfFood implements Command
     @Override
     public void execute ()
     {
-        foodList = FileSirviceFood.getListFoodFromFile();
+        List<Food> foodList = FileSirviceFood.getListFoodFromFile();
+        if (date == null)
+        {
+            date=LocalDate.now();
+
+        }
+        foodList = foodList.stream()
+                .filter(f -> f.getDate().equals(date)).toList();
         for (Food food : foodList)
         {
             System.out.println(food.toString());

@@ -20,6 +20,7 @@ public class DeleteProduct implements Command
     private DeleteProduct (Integer index, String name)
     {
         this.index = index;
+        this.name = name;
     }
 
     public static DeleteProduct create (LinkedHashMap<String, String> typeAndValue)
@@ -34,17 +35,17 @@ public class DeleteProduct implements Command
     @Override
     public void execute () throws IOException
     {
-        if (index != null)
-        {
-            FileServiceProduct.deleteLineByIndex(index);
-        }
-        else if (name != null)
+        if (name != null && index == null)
         {
             FileServiceProduct.deleteLineByName(name);
         }
+        else if (index != null && name == null)
+        {
+            FileServiceProduct.deleteLineByIndex(index);
+        }
         else
         {
-            System.out.println("Не введено имени или индекса для удаления.");
+            System.out.println("Ошибка ввода index или name.");
         }
     }
 }

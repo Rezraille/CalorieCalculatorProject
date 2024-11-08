@@ -11,12 +11,10 @@ import java.util.List;
 //str: getProd - за весь период (-i -n -e)
 public class ListOfProduct implements Command
 {
-    private List<Product> productList = new ArrayList<>();
-
     @Override
     public void execute ()
     {
-        productList = FileServiceProduct.getListProductFromFile();
+        List<Product> productList = FileServiceProduct.getListProductFromFile();
         for (Product product : productList)
         {
             System.out.println(product.toString());

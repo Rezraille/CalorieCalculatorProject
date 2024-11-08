@@ -16,11 +16,11 @@ import java.util.stream.Collectors;
 public class FileSirviceFood {
     private final static String PATH_FOOD_FILE = "D:\\Java\\2. Project\\Calorie Calculator Project\\src\\file\\foodFile.csv";
 
-    private final static String NAME_FOOD_FILE = "foodFile.csv";
+    private final static String NAME_FOOD_FILE = "D:\\Java\\2. Project\\Calorie Calculator Project\\src\\file\\foodFile.csv";
 
     public static void deleteLineByIndex(Integer index) throws IOException {
         List<Food> foods = getListFoodFromFile();
-        foods.stream()
+        foods = foods.stream()
                 .filter(f -> f.getIndex() != index)
                 .toList();
         overwriteToFile(convertToList(foods));
@@ -28,7 +28,7 @@ public class FileSirviceFood {
 
     public static void deleteLineByName(String name) throws IOException {
         List<Food> foods = getListFoodFromFile();
-        foods.stream()
+        foods = foods.stream()
                 .filter(f -> !f.getName().equals(name))
                 .toList();
         overwriteToFile(convertToList(foods));
@@ -54,7 +54,7 @@ public class FileSirviceFood {
 
     public static List<Food> getListFoodFromFile() {
         List<Food> foods = new ArrayList<>();
-        ;
+
         try (FileReader readerFile = new FileReader(PATH_FOOD_FILE); BufferedReader reader = new BufferedReader(readerFile)) {
             String line = null;
             while (reader.ready()) {
@@ -69,17 +69,24 @@ public class FileSirviceFood {
     }
 
     private static List<String> convertToList(List<Food> foods) {
-        List<String> infoValueFoods = new ArrayList<>();
-        foods.stream()
+        List<String> infoValueFoods = foods.stream()
                 .map(food -> food.toScvString())
                 .collect(Collectors.toList());
         return infoValueFoods;
     }
 
     private static void overwriteToFile(List<String> foods) {
-        try (FileWriter fileWriter = new FileWriter(NAME_FOOD_FILE);) {
-            for (String food : foods) {
-                fileWriter.write(food);
+        try (FileWriter fileWriter = new FileWriter(NAME_FOOD_FILE);)
+        {
+            if (foods.size() == 0)
+            {
+                fileWriter.write("");
+                fileWriter.flush();
+            }
+            for (String food : foods)
+            {
+                fileWriter.write(food + "\n");
+                fileWriter.flush();
             }
         } catch (IOException e) {
             System.out.println("Ошибка записи в файл " + PATH_FOOD_FILE);
@@ -89,7 +96,7 @@ public class FileSirviceFood {
 
     public static void writeToFile (String line)
     {
-        try (FileWriter fileWriter = new FileWriter(NAME_FOOD_FILE);)
+        try (FileWriter fileWriter = new FileWriter(NAME_FOOD_FILE, true);)
         {
             fileWriter.write(line);
         }
@@ -102,7 +109,7 @@ public class FileSirviceFood {
     public static void addLineToFile(Food food)
     {
         String line = food.toScvString();
-        writeToFile("\\n" + line);
+        writeToFile(line + "\n");
 
     }
 }
