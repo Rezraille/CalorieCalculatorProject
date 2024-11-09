@@ -26,26 +26,39 @@ public class DeleteProduct implements Command
     public static DeleteProduct create (LinkedHashMap<String, String> typeAndValue)
     {
         String i = typeAndValue.get(PREFIX_INDEX);
-        Integer index = i != null ? Integer.valueOf(i) : null;//TODO добавить проверку на число
+        Integer index;
+        try
+        {
+            index = i != null ? Integer.valueOf(i) : null;
+        }
+        catch(NumberFormatException e)
+        {
+            System.out.println("Некорректный формат числа.");
+            return null;
+        }
         String name = typeAndValue.get(PREFIX_NAME);
-        //TODO добавить обработку ошибок
         return new DeleteProduct(index, name);
     }
 
     @Override
     public void execute () throws IOException
     {
-        if (name != null && index == null)
+        if ((name ==  null && index == null) || (name != null && index != null))
+        {
+            System.out.println("Ошибка ввода index или name.");
+            return;
+        }
+
+        if (name != null)
         {
             FileServiceProduct.deleteLineByName(name);
         }
-        else if (index != null && name == null)
+        else
         {
             FileServiceProduct.deleteLineByIndex(index);
         }
-        else
-        {
-            System.out.println("Ошибка ввода index или name.");
-        }
+        System.out.println("Удаление продукта выполнено успешно.");
+
+
     }
 }

@@ -20,6 +20,11 @@ public class LineParser
     public static CommandInfo parse (String str)
     {
         LinkedHashMap<String, String> typeAndValue = new LinkedHashMap<>();
+        if (!str.contains(" "))
+        {
+            return new CommandInfo(str, typeAndValue);
+        }
+
         String command = str.substring(0, str.indexOf(' '));
         str = str.substring(str.indexOf(' ') + 1);
         String[] parametr = str.split(" ");

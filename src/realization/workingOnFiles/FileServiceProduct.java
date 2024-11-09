@@ -1,7 +1,6 @@
 package realization.workingOnFiles;
 
 import realization.LineParser;
-import realization.objects.Food;
 import realization.objects.Product;
 
 import java.io.BufferedReader;
@@ -14,8 +13,7 @@ import java.util.stream.Collectors;
 
 public class FileServiceProduct
 {
-    private final static String PATH_PRODUCT_FILE = "D:\\Java\\2. Project\\Calorie Calculator Project\\src\\file\\productFile.csv";
-    private final static String NAME_PRODUCT_FILE = "D:\\Java\\2. Project\\Calorie Calculator Project\\src\\file\\productFile.csv";
+    private final static String PATH_PRODUCT_FILE = "file\\productFile.csv";
 
     public static void deleteLineByIndex (Integer index) throws IOException
     {
@@ -66,20 +64,6 @@ public class FileServiceProduct
         return products;
     }
 
-    public static Product getProductByFood (List <Product>products, Food food)
-    {
-        for (Product product : products)
-        {
-            if (product.getName().equals(food.getName()))
-            {
-                return product;
-            }
-        }
-
-        return null;
-    }
-
-
     public static List<String> convertToList (List<Product> products)
     {
         List<String> infoValueProducts = products.stream()
@@ -90,18 +74,16 @@ public class FileServiceProduct
 
     public static void overwriteToFile (List<String> products)
     {
-        try (FileWriter fileWriter = new FileWriter(NAME_PRODUCT_FILE);)
+        try (FileWriter fileWriter = new FileWriter(PATH_PRODUCT_FILE);)
         {
-            if (products.size() == 0)
+            StringBuilder stringBuilder = new StringBuilder("");
+            for (String product : products)
             {
-                fileWriter.write("");
-                fileWriter.flush();
+                stringBuilder.append(product + "\n");
             }
-            for (String product:products)
-            {
-                fileWriter.write(product + "\n");
-                fileWriter.flush();
-            }
+
+            fileWriter.write(stringBuilder.toString());
+            fileWriter.flush();
 
         }
         catch (IOException e)
@@ -112,7 +94,7 @@ public class FileServiceProduct
     }
     public static void writeToFile (String line)
     {
-        try (FileWriter fileWriter = new FileWriter(NAME_PRODUCT_FILE, true);)
+        try (FileWriter fileWriter = new FileWriter(PATH_PRODUCT_FILE, true))
         {
             fileWriter.write(line);
             fileWriter.flush();

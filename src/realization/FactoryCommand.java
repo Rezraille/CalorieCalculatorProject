@@ -42,6 +42,7 @@ public class FactoryCommand
         {
             return new ListOfProduct();
         }
+        System.out.println("Нет такого имени команды.");
         return null;
     }
 }

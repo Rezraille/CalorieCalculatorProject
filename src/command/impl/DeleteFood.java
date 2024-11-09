@@ -1,8 +1,7 @@
 package command.impl;
 
 import command.Command;
-import realization.workingOnFiles.FileServiceProduct;
-import realization.workingOnFiles.FileSirviceFood;
+import realization.workingOnFiles.FileServiceFood;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
@@ -25,25 +24,38 @@ public class DeleteFood implements Command
     public static DeleteFood create(LinkedHashMap<String,String> typeAndValue)
     {
         String i = typeAndValue.get(PREFIX_INDEX);
-        Integer index = i != null ? Integer.valueOf(i) : null; //TODO добавить проверку на число
-        //TODO добавить обработку ошибок
+        Integer index;
+        try
+        {
+            index = i != null ? Integer.valueOf(i) : null;
+        }
+        catch(NumberFormatException e)
+        {
+            System.out.println("Некорректный формат числа.");
+            return null;
+        }
         String name = typeAndValue.get(PREFIX_NAME);
         return new DeleteFood(index,name);
     }
     @Override
     public void execute () throws IOException
     {
-        if (name != null && index == null)
+        if ((name ==  null && index == null) || (name != null && index != null))
         {
-            FileSirviceFood.deleteLineByName(name);
+            System.out.println("Ошибка ввода index или name.");
+            return;
         }
-        else if (index != null && name == null)
+
+        if (name != null)
         {
-            FileSirviceFood.deleteLineByIndex(index);
+            FileServiceFood.deleteLineByName(name);
         }
         else
         {
-            System.out.println("Ошибка ввода index или name.");
+            FileServiceFood.deleteLineByIndex(index);
         }
+        System.out.println("Удаление приема пищи выполнено успешно.");
+
+
     }
 }

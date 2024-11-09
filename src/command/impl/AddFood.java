@@ -4,10 +4,11 @@ import command.Command;
 import realization.objects.Food;
 import realization.objects.Product;
 import realization.workingOnFiles.FileServiceProduct;
-import realization.workingOnFiles.FileSirviceFood;
+import realization.workingOnFiles.FileServiceFood;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.LinkedHashMap;
 import java.util.List;
 // добавить прием пищи - кушать
@@ -48,15 +49,32 @@ public class AddFood implements Command {
     public static AddFood create(LinkedHashMap<String, String> typeAndValue) {
 
         String d = typeAndValue.get(PREFIX_DATE);
-        LocalDate date = d != null ? LocalDate.parse(d,formatter) : null;
-        String i = typeAndValue.get(PREFIX_INDEX);
-        Integer index = i != null ? Integer.valueOf(i) : null; //TODO добавить проверку на число
         String name = typeAndValue.get(PREFIX_NAME);
+        String i = typeAndValue.get(PREFIX_INDEX);
         String w = typeAndValue.get(PREFIX_WEIGHT);
-        Integer weight = w != null ? Integer.valueOf(w) : null; //TODO добавить проверку на число
         String e = typeAndValue.get(PREFIX_ENERGY);
-        Integer energy = e != null ? Integer.valueOf(e) : null; //TODO добавить проверку на число
-        //TODO добавить обработку ошибок
+
+        LocalDate date;
+        Integer weight;
+        Integer energy;
+        Integer index;
+        try
+        {
+            weight = w != null ? Integer.valueOf(w) : null;
+            energy = e != null ? Integer.valueOf(e) : null;
+            index = i != null ? Integer.valueOf(i) : null;
+            date = d != null ? LocalDate.parse(d,formatter) : null;
+        }
+        catch(NumberFormatException exception)
+        {
+            System.out.println("Некорректный формат числа.");
+            return null;
+        }
+        catch (DateTimeParseException exception)
+        {
+            System.out.println("Некорректный формат даты.");
+            return null;
+        }
         return new AddFood(date, index, name, weight, energy);
     }
 
@@ -72,11 +90,13 @@ public class AddFood implements Command {
         Product product = getProduct();
         if (product == null)
         {
+            System.out.println("Не удалось найти продукт.");
             return;
         }
 
+
         Food food = Food.createFood(this.date, product.getName(), this.weight);
-        FileSirviceFood.addLineToFile(food);
+        FileServiceFood.addLineToFile(food);
     }
 
     private Product getProduct()

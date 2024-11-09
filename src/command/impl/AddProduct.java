@@ -27,12 +27,17 @@ public class AddProduct implements Command
 
     public static AddProduct create (LinkedHashMap<String, String> typeAndValue)
     {
-
         String name = typeAndValue.get(PREFIX_NAME);
-        Integer energy = Integer.valueOf(typeAndValue.get(PREFIX_ENERGY));//TODO добавить проверку на число
-        //TODO ошибку если null
-
-
+        Integer energy;
+        try
+        {
+            energy = Integer.valueOf(typeAndValue.get(PREFIX_ENERGY));
+        }
+        catch(NumberFormatException e)
+        {
+            System.out.println("Некорректный формат числа или отсутствует число.");
+            return null;
+        }
         return new AddProduct(name, energy);
     }
 
@@ -46,13 +51,22 @@ public class AddProduct implements Command
         if (product != null)
         {
             product.setEnergy(this.energy);//обновление ккал
+
+
             List<String> productsTemp = FileServiceProduct.convertToList(products);
             FileServiceProduct.overwriteToFile(productsTemp);
         }
         else
         {
-            product = product.createProduct(this.name, this.energy);
-            FileServiceProduct.addLineToFile(product);
+            if (this.name != null)
+            {
+                product = product.createProduct(this.name, this.energy);
+                FileServiceProduct.addLineToFile(product);
+            }
+            else
+            {
+                System.out.println("Некорректное имя.");
+            }
         }
     }
 }

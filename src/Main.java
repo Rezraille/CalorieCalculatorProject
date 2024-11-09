@@ -26,6 +26,10 @@ public class Main
             }
             CommandInfo info = LineParser.parse(text);
             Command command = FactoryCommand.createCommandByInfo(info);
+            if (command == null)
+            {
+                continue;
+            }
             command.execute();
         }
 

@@ -2,7 +2,6 @@ package realization.workingOnFiles;
 
 import realization.LineParser;
 import realization.objects.Food;
-import realization.objects.Product;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -13,10 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FileSirviceFood {
-    private final static String PATH_FOOD_FILE = "D:\\Java\\2. Project\\Calorie Calculator Project\\src\\file\\foodFile.csv";
-
-    private final static String NAME_FOOD_FILE = "D:\\Java\\2. Project\\Calorie Calculator Project\\src\\file\\foodFile.csv";
+public class FileServiceFood {
+    private final static String PATH_FOOD_FILE = "file\\foodFile.csv";
 
     public static void deleteLineByIndex(Integer index) throws IOException {
         List<Food> foods = getListFoodFromFile();
@@ -75,20 +72,22 @@ public class FileSirviceFood {
         return infoValueFoods;
     }
 
-    private static void overwriteToFile(List<String> foods) {
-        try (FileWriter fileWriter = new FileWriter(NAME_FOOD_FILE);)
+    private static void overwriteToFile(List<String> foods)
+    {
+
+        try (FileWriter fileWriter = new FileWriter(PATH_FOOD_FILE);)
         {
-            if (foods.size() == 0)
-            {
-                fileWriter.write("");
-                fileWriter.flush();
-            }
+            StringBuilder stringBuilder = new StringBuilder("");
+
             for (String food : foods)
             {
-                fileWriter.write(food + "\n");
-                fileWriter.flush();
+                stringBuilder.append(food + "\n");
             }
-        } catch (IOException e) {
+            fileWriter.write(stringBuilder.toString());
+            fileWriter.flush();
+        }
+        catch (IOException e)
+        {
             System.out.println("Ошибка записи в файл " + PATH_FOOD_FILE);
             e.printStackTrace();
         }
@@ -96,7 +95,7 @@ public class FileSirviceFood {
 
     public static void writeToFile (String line)
     {
-        try (FileWriter fileWriter = new FileWriter(NAME_FOOD_FILE, true);)
+        try (FileWriter fileWriter = new FileWriter(PATH_FOOD_FILE, true);)
         {
             fileWriter.write(line);
         }

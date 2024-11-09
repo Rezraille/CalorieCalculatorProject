@@ -1,12 +1,12 @@
 package command.impl;
 
 import command.Command;
+import java.time.format.DateTimeParseException;
 import realization.objects.Food;
-import realization.workingOnFiles.FileSirviceFood;
+import realization.workingOnFiles.FileServiceFood;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -26,22 +26,31 @@ public class ListOfFood implements Command
     public static ListOfFood create(LinkedHashMap<String,String> typeAndValue)
     {
         String d = typeAndValue.get(PREFIX_DATE);
-        LocalDate date = d != null ? LocalDate.parse(d,formatter) : null;
-        //TODO ошибку если null
+        LocalDate date;
+        try
+        {
+            date = d != null ? LocalDate.parse(d,formatter) : null;
+        }
+        catch (DateTimeParseException e)
+        {
+            System.out.println("Некорректный формат даты.");
+            return null;
+        }
         return new ListOfFood(date);
     }
 
     @Override
     public void execute ()
     {
-        List<Food> foodList = FileSirviceFood.getListFoodFromFile();
+        List<Food> foodList = FileServiceFood.getListFoodFromFile();
         if (date == null)
         {
             date=LocalDate.now();
 
         }
         foodList = foodList.stream()
-                .filter(f -> f.getDate().equals(date)).toList();
+                .filter(f -> f.getDate().equals(date))
+                .toList();
         for (Food food : foodList)
         {
             System.out.println(food.toString());

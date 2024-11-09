@@ -19,9 +19,5 @@ public class ListOfProduct implements Command
         {
             System.out.println(product.toString());
         }
-        //TODO СЧИТАТЬ ПУТЬ К ФАЙЛУ
-        //TODO СЧИТАТЬ ДАННЫЕ
-        //TODO ВЫВЕСТИ ДАННЫЕ В КОНСОЛЬ
-        //TODO ИНАЧЕ - НАПИСАТЬ ЧТО ДАННЫХ НЕТ
     }
 }
